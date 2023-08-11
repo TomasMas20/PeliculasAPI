@@ -12,7 +12,7 @@ namespace PeliculasAPI.Servicios
             connectionString = configuration.GetConnectionString("AzureStorage");
         }
 
-        public async Task<string> BorrarArchivo(string ruta, string contenedor)
+        public async Task BorrarArchivo(string ruta, string contenedor)
         {
             if (string.IsNullOrEmpty(ruta))
             {
@@ -48,6 +48,11 @@ namespace PeliculasAPI.Servicios
 
             await blob.UploadAsync(new BinaryData(contenido), blobUploadOptions);
             return blob.Uri.ToString();
+        }
+
+        Task<string> IAlmacenadorArchivos.BorrarArchivo(string ruta, string contenedor)
+        {
+            throw new NotImplementedException();
         }
     }
 }

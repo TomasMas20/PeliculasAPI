@@ -15,7 +15,7 @@ namespace PeliculasAPI.Validaciones
         {
             if (grupoTipoArchivo == GrupoTipoArchivo.Imagen)
             {
-                tiposValidos = new string[] { "image/jepg", "image/png", "image/gif" };
+                tiposValidos = new string[] { "image/jpeg", "image/png", "image/gif" };
             }
         }
 
@@ -35,7 +35,7 @@ namespace PeliculasAPI.Validaciones
 
             if (!tiposValidos.Contains(formFile.ContentType))
             {
-                return new ValidationResult($"El tipo del archivo debe ser uno de los siguientes: {string.Join(",", tiposValidos)}");
+                return new ValidationResult($"El tipo del archivo debe ser uno de los siguientes: {string.Join(", ", tiposValidos)}");
             }
 
             return ValidationResult.Success;

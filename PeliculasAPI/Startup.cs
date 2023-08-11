@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PeliculasAPI.Servicios;
 using System.Text.Json.Serialization;
 
 namespace PeliculasAPI
@@ -17,10 +18,13 @@ namespace PeliculasAPI
         {
             services.AddAutoMapper(typeof(Startup));
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));  
+            services.AddTransient<IAlmacenadorArchivos, AlmacenadorArchivosAzure>();
 
-            services.AddControllers();
+            services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddControllers()
+                .AddNewtonsoftJson();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
